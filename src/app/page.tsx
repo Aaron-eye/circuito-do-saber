@@ -1,95 +1,103 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import PostCard from "./components/PostCard";
+import styles from "./page.module.scss";
+import Link from "next/link";
+import LinkButton from "./components/LinkButton";
 
 export default function Home() {
+  // Exemplos de posts divididos por categoria
+  const categories = {
+    eletrostatica: [
+      {
+        id: 1,
+        title: "O que é Eletrostática?",
+        excerpt: "Introdução aos princípios básicos da eletrostática...",
+        slug: "o-que-e-eletrostatica",
+      },
+      {
+        id: 2,
+        title: "Força Eletrostática",
+        excerpt: "Entenda as interações de cargas elétricas...",
+        slug: "forca-eletrostatica",
+      },
+    ],
+    eletrodinamica: [
+      {
+        id: 3,
+        title: "Corrente Elétrica",
+        excerpt: "Como a corrente elétrica flui em circuitos...",
+        slug: "corrente-eletrica",
+      },
+      {
+        id: 4,
+        title: "Leis de Ohm",
+        excerpt: "A relação entre tensão, corrente e resistência...",
+        slug: "leis-de-ohm",
+      },
+    ],
+    aplicacoes: [
+      {
+        id: 5,
+        title: "Circuitos Práticos",
+        excerpt: "Veja exemplos práticos de aplicação de circuitos...",
+        slug: "circuitos-praticos",
+      },
+      {
+        id: 6,
+        title: "Eletrodinâmica no Dia a Dia",
+        excerpt: "Descubra como a eletrodinâmica está presente...",
+        slug: "eletrodinamica-no-dia-a-dia",
+      },
+    ],
+  };
+
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      <Header />
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      <section className={styles.hero}>
+        <div className={styles.background}>
+          <div></div>
+          <div className={styles.imageContainer}>
+            <div className={styles.gradient1}></div>
+            <div className={styles.gradient2}></div>
+            <img src="/img/hero.png" alt="Eletrostática e Eletrodinâmica" />
+          </div>
         </div>
+        <div className={styles.contentGrid}>
+          <div className={styles.textContent}>
+            <h1>Aprenda Eletrostática e Eletrodinâmica</h1>
+            <p>
+              O lugar ideal para aprofundar o seu conhecimento sobre os
+              conteúdos relativos à eletricidade do Ensino Médio.
+            </p>
+            <LinkButton href="/info"> Saiba Mais </LinkButton>
+          </div>
+          <div></div>
+        </div>
+      </section>
+
+      <main className={styles.main}>
+        <section className={styles.blogSection}>
+          <h2 id="categorias">Leia nosso blog educacional</h2>
+          <div className={styles.cardGrid}>
+            {categories.eletrostatica.map((post) => (
+              <PostCard
+                key={post.id}
+                title={post.title}
+                excerpt={post.excerpt}
+                slug={post.slug}
+              />
+            ))}
+          </div>
+          <LinkButton href="/blog" className={styles.seeMore}>
+            Ver Todos
+          </LinkButton>
+        </section>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      <Footer />
     </div>
   );
 }

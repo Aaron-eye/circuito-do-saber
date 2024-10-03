@@ -1,0 +1,25 @@
+:root {
+  --primaryColor: #dfa300;
+  --primaryColorDark: #c97800;
+  --secondaryColor: #1575f3;
+  --headerHeight: 3.2rem;
+  --footerHeight: 2rem;
+  --lightTextColor: #eeeee9;
+  --subtleLightColor: #f5f5f5;
+  --darkTextColor: #1d1d1d;
+  --subtleDarkTextColor: #535353;
+  --grayTextColor: #8b8b8b;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}

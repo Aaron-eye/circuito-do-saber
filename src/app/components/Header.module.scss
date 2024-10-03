@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--headerHeight);
+  padding: 0.5rem 4rem;
+
+  text-decoration: none;
+
+  z-index: 10;
+
+  &.fixed {
+    background-color: white;
+
+    position: fixed;
+    top: calc(-1 * var(--headerHeight));
+    transform: translateY(var(--headerHeight));
+
+    transition: transform 0.5s;
+
+    a {
+      color: var(--subtleDarkTextColor);
+    }
+  }
+
+  &.absolute {
+    background-color: none;
+
+    position: absolute;
+    top: 0;
+    transform: none;
+
+    transition: transform 0.5s;
+
+    a {
+      color: white;
+    }
+  }
+
+  .logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+
+    a {
+      transition: color 0.3s ease;
+      &:hover {
+        color: var(--primaryColor);
+        transition: color 0.3s ease;
+      }
+    }
+  }
+}

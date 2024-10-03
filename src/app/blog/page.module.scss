@@ -1,0 +1,15 @@
+/* styles/Blog.module.scss */
+
+.container {
+  padding-bottom: var(--footerHeight);
+}
+
+.main {
+  padding: 20px;
+
+  h1 {
+    color: var(--primaryColor);
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
