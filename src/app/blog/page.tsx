@@ -11,7 +11,7 @@ export default async function PostsPage() {
     "use server";
     const filteredPosts = await fetchFilteredPosts("post", selectedFilters);
     return filteredPosts.map((post: Post) => {
-      return <PostCard post={post} />;
+      return <PostCard key={post.slug} post={post} />;
     });
   };
 

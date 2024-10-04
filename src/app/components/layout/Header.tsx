@@ -5,28 +5,28 @@ import styles from "./Header.module.scss";
 import { usePathname } from "next/navigation";
 
 const Header = () => {
+  const [isScrolledPastHalf, setIsScrolledPastHalf] = useState(false);
+
   const defaultHeaderClassName = `${styles.header} ${styles.fixed}`;
   let headerClassName = defaultHeaderClassName;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= window.innerHeight * 0.5) {
+        setIsScrolledPastHalf(true);
+      } else {
+        setIsScrolledPastHalf(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   if (usePathname() === "/") {
-    const [isScrolledPastHalf, setIsScrolledPastHalf] = useState(false);
-
-    useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY >= window.innerHeight * 0.5) {
-          setIsScrolledPastHalf(true);
-        } else {
-          setIsScrolledPastHalf(false);
-        }
-      };
-
-      window.addEventListener("scroll", handleScroll);
-
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }, []);
-
     headerClassName = isScrolledPastHalf
       ? defaultHeaderClassName
       : `${styles.header} ${styles.absolute}`;

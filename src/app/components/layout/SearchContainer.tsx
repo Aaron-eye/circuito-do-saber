@@ -41,6 +41,7 @@ export default function SearchContainer({
         {filters.map((filter) => (
           <div className={styles.filter} key={filter}>
             <Checkbox
+              key={filter}
               className={styles["checkbox"]}
               checked={selectedFilters.includes(filter)}
               onChange={() => handleToggle(filter)}
