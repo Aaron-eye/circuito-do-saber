@@ -1,11 +1,11 @@
-.linkButton {
+.link-button {
   display: flex;
 
   a {
     padding: 1rem 2rem;
 
-    background-color: var(--primaryColor);
-    color: var(--lightTextColor);
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
 
     font-size: 1rem;
     font-weight: bold;
@@ -15,7 +15,7 @@
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: var(--primaryColorDark);
+      background-color: var(--primary-color-dark);
     }
   }
 }

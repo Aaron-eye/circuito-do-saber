@@ -1,50 +1,95 @@
 .card {
   background-color: white;
+  width: 100%;
   height: 27rem;
   display: grid;
   grid-template-rows: 4fr 3fr;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.205);
 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-  .imageContainer {
+  .image-container {
     width: 100%;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.02);
+        transition: transform 0.3s ease;
+      }
+    }
+
+    svg {
+      height: 70%;
+      fill: var(--gray-text-color);
     }
   }
 
-  .textContent {
+  .text-content {
+    width: 100%;
+    height: 100%;
+    height: 10rem;
     padding: 1.2rem;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    .descriptionContainer {
+    .description-container {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      position: relative;
+
+      width: 100%;
+      height: 100%;
+
       h3 {
-        color: var(--darkTextColor);
-        margin: 0 0 0.75rem;
+        color: var(--dark-text-color);
+        font-size: 1.2rem;
+        margin: 0 0 0.2rem;
       }
 
       p {
-        color: var(--grayTextColor);
+        width: 100%;
+        height: 100%;
+        flex-grow: 1;
+        color: var(--gray-text-color);
         font-size: 0.75rem;
-
         margin: 0;
+
+        overflow: hidden;
+        word-break: break-word;
+      }
+
+      .gradient {
+        position: absolute;
+        bottom: 0;
+
+        width: 100%;
+        height: 30%;
+        background: linear-gradient(
+          to top,
+          rgb(255, 255, 255),
+          rgba(255, 255, 255, 0)
+        );
+        position: absolute;
+        bottom: 0;
       }
     }
-    .readMore {
-      color: var(--primaryColorDark);
+
+    .read-more {
+      color: var(--primary-color-dark);
       font-size: 1rem;
       font-weight: 800;
-
       text-decoration: underline;
       text-underline-offset: 0.2rem;
       text-decoration-thickness: 0.2rem;
@@ -52,7 +97,7 @@
       transition: text-decoration-color 0.3s ease;
 
       &:hover {
-        text-decoration-color: var(--primaryColorDark);
+        text-decoration-color: var(--primary-color-dark);
         transition: text-decoration-color 0.3s ease;
       }
     }

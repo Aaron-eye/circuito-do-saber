@@ -2,12 +2,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Header.module.scss";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const defaultHeaderClassName = `${styles.header} ${styles.fixed}`;
   let headerClassName = defaultHeaderClassName;
 
-  if (window.location.pathname === "/") {
+  if (usePathname() === "/") {
     const [isScrolledPastHalf, setIsScrolledPastHalf] = useState(false);
 
     useEffect(() => {

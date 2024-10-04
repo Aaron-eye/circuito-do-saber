@@ -1,53 +1,31 @@
-// pages/blog.jsx
-
-import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+// PostsPage.tsx (Server Component)
+import { fetchFilteredPosts } from "@/app/actions/postsActions";
+import SearchContainer from "@/components/layout/SearchContainer";
 import PostCard from "../components/PostCard";
 import styles from "./page.module.scss";
+import Post from "@/app/types/Post";
+import { fetchCategories } from "@/app/actions/postsActions";
 
-// Exemplo de dados estáticos. Em um projeto real, você buscaria de uma API ou CMS.
-const posts = [
-  {
-    id: 1,
-    title: "Introdução à Eletrostática",
-    excerpt: "Aprenda os conceitos básicos da eletrostática...",
-    slug: "introducao-a-eletrostatica",
-  },
-  {
-    id: 2,
-    title: "Leis de Coulomb",
-    excerpt: "Entenda a lei que descreve a força entre cargas...",
-    slug: "leis-de-coulomb",
-  },
-  // Adicione mais posts conforme necessário
-];
+export default async function PostsPage() {
+  const searchHandler = async (selectedFilters: string[]) => {
+    "use server";
+    const filteredPosts = await fetchFilteredPosts("post", selectedFilters);
+    return filteredPosts.map((post: Post) => {
+      return <PostCard post={post} />;
+    });
+  };
 
-const Blog = () => {
+  const categoryNames = (await fetchCategories()).map(
+    (category: any) => category.title
+  );
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Blog - Circuito do Saber</title>
-        <meta
-          name="description"
-          content="Artigos sobre Eletrodinâmica e Eletrostática."
-        />
-      </Head>
-      <Header />
-      <main className={styles.main}>
-        <h1>Blog</h1>
-        {posts.map((post) => (
-          <PostCard
-            key={post.id}
-            title={post.title}
-            excerpt={post.excerpt}
-            slug={post.slug}
-          />
-        ))}
-      </main>
-      <Footer />
+    <div className={styles.page}>
+      <SearchContainer
+        searchSubject="Blog"
+        filters={categoryNames}
+        searchHandler={searchHandler}
+      />
     </div>
   );
-};
-
-export default Blog;
+}

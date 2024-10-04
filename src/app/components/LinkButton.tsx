@@ -10,7 +10,7 @@ export default function LinkButton({
   className?: string;
 }) {
   return (
-    <div className={styles.linkButton}>
+    <div className={styles["link-button"]}>
       <a href={href} className={className}>
         {children}
       </a>

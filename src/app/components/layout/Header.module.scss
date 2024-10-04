@@ -3,8 +3,10 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: var(--headerHeight);
+  height: var(--header-height);
   padding: 0.5rem 4rem;
+
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.123);
 
   text-decoration: none;
 
@@ -14,13 +16,13 @@
     background-color: white;
 
     position: fixed;
-    top: calc(-1 * var(--headerHeight));
-    transform: translateY(var(--headerHeight));
+    top: calc(-1 * var(--header-height));
+    transform: translateY(var(--header-height));
 
     transition: transform 0.5s;
 
     a {
-      color: var(--subtleDarkTextColor);
+      color: var(--subtle-dark-text-color);
     }
   }
 
@@ -51,7 +53,7 @@
     a {
       transition: color 0.3s ease;
       &:hover {
-        color: var(--primaryColor);
+        color: var(--primary-color);
         transition: color 0.3s ease;
       }
     }
