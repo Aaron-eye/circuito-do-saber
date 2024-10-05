@@ -62,13 +62,27 @@
     }
   }
 
-  .content {
-    padding-top: var(--header-bottom-margin);
-    width: 100%;
-    margin: 0 0 1.5rem;
+  .content-container {
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    .content {
+      padding-top: var(--header-bottom-margin);
+      width: 100%;
+      margin: 0 0 1.5rem;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .no-results {
+      font-size: 1.2rem;
+      color: var(--soft-dark-text);
+    }
   }
 }

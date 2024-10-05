@@ -18,7 +18,6 @@ export default function blockToJSX(block: any) {
     blocks: block,
     serializers: serializers,
   });
-  console.log(htmlBlock);
 
   const blockContent = parse(htmlBlock);
   return blockContent;

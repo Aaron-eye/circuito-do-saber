@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Header.module.scss";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const Header = () => {
   const [isScrolledPastHalf, setIsScrolledPastHalf] = useState(false);
@@ -34,9 +35,9 @@ const Header = () => {
 
   return (
     <header className={headerClassName}>
-      <div className={styles.logo}>
-        <Link href="/">Circuito do Saber</Link>
-      </div>
+      <Link className={styles.logo} href="/">
+        <Image src="/img/logo.png" width={100} height={100} alt="Logo" />
+      </Link>
       <nav className={styles.nav}>
         <Link href="/blog">Blog</Link>
         <Link href="/quizzes">Quizzes</Link>

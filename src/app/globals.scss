@@ -8,13 +8,15 @@
   --subtle-dark-text-color: #535353;
   --gray-text-color: #8b8b8b;
 
-  --header-height: 3.2rem;
+  --header-height: 4rem;
   --footer-height: 2rem;
   --header-bottom-margin: 2rem;
 }
 
+html {
+}
+
 body {
-  width: 100vw;
   margin: 0;
   padding: 0;
 }

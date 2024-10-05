@@ -1,3 +1,5 @@
+@import "@/app/styles/mixins/text-link.scss";
+
 .card {
   background-color: white;
   width: 100%;
@@ -18,6 +20,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+
       transition: transform 0.3s ease;
 
       &:hover {
@@ -29,6 +32,13 @@
     svg {
       height: 70%;
       fill: var(--gray-text-color);
+
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.02);
+        transition: transform 0.3s ease;
+      }
     }
   }
 
@@ -87,19 +97,9 @@
     }
 
     .read-more {
-      color: var(--primary-color-dark);
       font-size: 1rem;
-      font-weight: 800;
-      text-decoration: underline;
-      text-underline-offset: 0.2rem;
-      text-decoration-thickness: 0.2rem;
-      text-decoration-color: transparent;
-      transition: text-decoration-color 0.3s ease;
 
-      &:hover {
-        text-decoration-color: var(--primary-color-dark);
-        transition: text-decoration-color 0.3s ease;
-      }
+      @include text-link();
     }
   }
 }

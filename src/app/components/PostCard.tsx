@@ -2,19 +2,28 @@
 
 import Link from "next/link";
 import styles from "./PostCard.module.scss";
-import Post from "../types/Post";
 import Lamp from "./svg/Lamp";
+import urlForImage from "../utils/urlForImage";
+import Image from "next/image";
 
 const PostCard = ({ post }: { post: any }) => {
-  const { title, mainImageUrl } = post;
+  const { title, mainImage } = post;
   const slug = post.slug.current;
-  console.log(post);
   const excerpt = post.firstBlocks.map((block: any) => block.text).join(" ");
 
   const href = `/blog/${slug}`;
 
+  let mainImageUrl;
+  if (mainImage) {
+    try {
+      mainImageUrl = urlForImage(mainImage).width(400).height(400).url();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const illustration = mainImageUrl ? (
-    <img src={mainImageUrl} alt={title} />
+    <Image width={400} height={400} src={mainImageUrl} alt={title} />
   ) : (
     <Lamp />
   );

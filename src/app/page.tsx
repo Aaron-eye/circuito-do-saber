@@ -1,11 +1,12 @@
 import Footer from "./components/layout/Footer";
 import PostCard from "./components/PostCard";
 import styles from "./page.module.scss";
-import Link from "next/link";
+import { fetchFilteredPosts } from "./actions/postActions";
 import LinkButton from "./components/LinkButton";
+import Post from "./blog/[slug]/page";
 
-export default function Home() {
-  // Exemplos de posts divididos por categoria
+export default async function Home() {
+  const examplePosts = await fetchFilteredPosts(3);
 
   return (
     <div className={styles.page}>
@@ -35,22 +36,15 @@ export default function Home() {
         <section className={styles.blogSection}>
           <h2 id="categorias">Leia nosso blog educacional</h2>
           <div className={styles["card-grid"]}>
-            {/* {categories.eletrostatica.map((post) => (
-              <PostCard
-                key={post.id}
-                title={post.title}
-                excerpt={post.excerpt}
-                slug={post.slug}
-              />
-            ))} */}
+            {examplePosts.map((post) => (
+              <PostCard key={post.slug} post={post} />
+            ))}
           </div>
           <LinkButton href="/blog" className={styles["see-more"]}>
             Ver Todos
           </LinkButton>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

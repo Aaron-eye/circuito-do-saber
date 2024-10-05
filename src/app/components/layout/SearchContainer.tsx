@@ -3,6 +3,7 @@
 import Checkbox from "@mui/material/Checkbox";
 import styles from "./searchContainer.module.scss";
 import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
 
 export default function SearchContainer({
   searchSubject,
@@ -13,13 +14,21 @@ export default function SearchContainer({
   filters?: string[];
   searchHandler: (selectedFilters: string[]) => Promise<any>;
 }) {
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const hashContent = window.location.hash.slice(1);
+  const previousSelectedFilters = hashContent ? hashContent.split(",") : [];
+  const [selectedFilters, setSelectedFilters] = useState<string[]>(
+    previousSelectedFilters
+  );
   const [items, setItems] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  console.log(selectedFilters);
 
   useEffect(() => {
     const setInitialItems = async () => {
-      const initialItems = await searchHandler([]);
+      const initialItems = await searchHandler(selectedFilters);
       setItems(initialItems);
+      setIsLoading(false);
     };
     setInitialItems();
   }, []);
@@ -29,10 +38,16 @@ export default function SearchContainer({
       ? selectedFilters.filter((f) => f !== filter)
       : [...selectedFilters, filter];
 
+    window.location.hash = newSelectedFilters.join(",");
     setSelectedFilters(newSelectedFilters);
+
+    setIsLoading(true);
     const newItems = await searchHandler(newSelectedFilters);
     setItems(newItems);
+    setIsLoading(false);
   };
+
+  console.log(selectedFilters);
 
   const filterSection = (
     <div className={styles["filter-section"]}>
@@ -45,6 +60,7 @@ export default function SearchContainer({
               className={styles["checkbox"]}
               checked={selectedFilters.includes(filter)}
               onChange={() => handleToggle(filter)}
+              disabled={isLoading}
             />
             <label>{filter}</label>
           </div>
@@ -60,7 +76,20 @@ export default function SearchContainer({
         {/* <p className={styles.results}>x resultados</p> */}
         {filters.length > 0 && filterSection}
       </div>
-      <div className={styles["content"]}>{items}</div>
+
+      <div className={styles["content-container"]}>
+        {isLoading && (
+          <div className={styles["loading-container"]}>
+            <CircularProgress />
+          </div>
+        )}
+        {!isLoading && items.length > 0 && (
+          <div className={styles["content"]}>{items}</div>
+        )}
+        {!isLoading && items.length == 0 && (
+          <p className={"no-results"}>Nenhum resultado encontrado.</p>
+        )}
+      </div>
     </div>
   );
 }
