@@ -6,37 +6,39 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 const Header = () => {
-  const [isScrolledPastHalf, setIsScrolledPastHalf] = useState(false);
-
-  const defaultHeaderClassName = `${styles.header} ${styles.fixed}`;
-  let headerClassName = defaultHeaderClassName;
+  let pathName = usePathname();
+  const [isAbsolute, setIsAbsolute] = useState(pathName === "/");
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= window.innerHeight * 0.5) {
-        setIsScrolledPastHalf(true);
+        setIsAbsolute(false);
       } else {
-        setIsScrolledPastHalf(false);
+        setIsAbsolute(true);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    if (pathName === "/") {
+      setIsAbsolute(true);
+      window.addEventListener("scroll", handleScroll);
+    } else {
+      setIsAbsolute(false);
+    }
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [pathName]);
 
-  if (usePathname() === "/") {
-    headerClassName = isScrolledPastHalf
-      ? defaultHeaderClassName
-      : `${styles.header} ${styles.absolute}`;
-  }
+  const headerClassName = isAbsolute
+    ? `${styles.header} ${styles.absolute}`
+    : `${styles.header} ${styles.fixed}`;
+  const logoSrc = isAbsolute ? "/img/logo.png" : "/img/logo-turned-off.png";
 
   return (
     <header className={headerClassName}>
       <Link className={styles.logo} href="/">
-        <Image src="/img/logo.png" width={100} height={100} alt="Logo" />
+        <Image src={logoSrc} width={110} height={110} alt="Logo" />
       </Link>
       <nav className={styles.nav}>
         <Link href="/blog">Blog</Link>

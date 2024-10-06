@@ -48,6 +48,10 @@ export default function SearchContainer({
     setIsLoading(false);
   };
 
+  const filterLabelClassName = isLoading
+    ? `${styles["filter-label"]} ${styles["disabled"]}`
+    : styles["filter-label"];
+
   const filterSection = (
     <div className={styles["filter-section"]}>
       <h2>Filtros</h2>
@@ -61,7 +65,7 @@ export default function SearchContainer({
               onChange={() => handleToggle(filter)}
               disabled={isLoading}
             />
-            <label>{filter}</label>
+            <label className={filterLabelClassName}>{filter}</label>
           </div>
         ))}
       </div>

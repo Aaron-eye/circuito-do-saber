@@ -54,12 +54,14 @@ export default async function Post({ params }: { params: any }) {
         </div>
       </div>
       <div className={styles["main-image-container"]}>
-        <Image
-          src={urlForImage(mainImage).width(400).height(300).url()}
-          width={700}
-          height={400}
-          alt={slug}
-        />
+        {mainImage && (
+          <Image
+            src={urlForImage(mainImage).width(400).height(300).url()}
+            width={700}
+            height={400}
+            alt={slug}
+          />
+        )}
       </div>
       {postContent}
     </div>

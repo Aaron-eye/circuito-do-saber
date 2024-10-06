@@ -1,5 +1,6 @@
 .search-container {
   width: 100%;
+  min-height: 100vh;
   display: inline-block;
 
   display: grid;
@@ -53,9 +54,13 @@
             color: var("--primary-color");
           }
 
-          label {
+          .filter-label {
             font-size: 0.8rem;
             color: var(--soft-dark-text);
+          }
+
+          .filter-label.disabled {
+            color: var(--gray-text-color);
           }
         }
       }
@@ -63,6 +68,8 @@
   }
 
   .content-container {
+    min-height: 100%;
+
     .loading-container {
       display: flex;
       justify-content: center;
