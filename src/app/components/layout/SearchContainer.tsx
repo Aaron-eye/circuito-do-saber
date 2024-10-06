@@ -14,19 +14,20 @@ export default function SearchContainer({
   filters?: string[];
   searchHandler: (selectedFilters: string[]) => Promise<any>;
 }) {
-  const hashContent = window.location.hash.slice(1);
-  const previousSelectedFilters = hashContent ? hashContent.split(",") : [];
-  const [selectedFilters, setSelectedFilters] = useState<string[]>(
-    previousSelectedFilters
-  );
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [items, setItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(selectedFilters);
-
   useEffect(() => {
     const setInitialItems = async () => {
-      const initialItems = await searchHandler(selectedFilters);
+      const hashContent = window.location.hash.slice(1);
+      let initialFilters: string[] = [];
+      if (hashContent) {
+        initialFilters = hashContent.split(",");
+        setSelectedFilters(hashContent.split(","));
+      }
+
+      const initialItems = await searchHandler(initialFilters);
       setItems(initialItems);
       setIsLoading(false);
     };
@@ -46,8 +47,6 @@ export default function SearchContainer({
     setItems(newItems);
     setIsLoading(false);
   };
-
-  console.log(selectedFilters);
 
   const filterSection = (
     <div className={styles["filter-section"]}>
