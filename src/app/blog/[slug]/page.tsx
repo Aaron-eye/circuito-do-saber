@@ -1,5 +1,4 @@
 import { fetchPostPage } from "@/app/actions/postActions";
-import blockToJSX from "@/app/utils/blockToJSX";
 import styles from "./page.module.scss";
 import Tag from "@/app/components/svg/Tag";
 import Image from "next/image";
@@ -11,9 +10,7 @@ export default async function Post({ params }: { params: any }) {
   if (!slug) return;
 
   const post = await fetchPostPage(slug);
-  const { title, publishedAt, mainImage, categoryNames, author } = post;
-  const formattedDate = new Date(publishedAt).toLocaleDateString("pt-BR");
-  const postContent = blockToJSX(post.body);
+  const { title, publishedAt, mainImage, categoryNames, author, body } = post;
 
   const authorImgSize = 100;
 
@@ -36,7 +33,7 @@ export default async function Post({ params }: { params: any }) {
             <p className={styles["author-name"]}>
               {author && `Escrito por ${author.name}`}
             </p>
-            <p className={styles["date"]}>Publicação: {formattedDate + ""}</p>
+            <p className={styles["date"]}>Publicação: {publishedAt + ""}</p>
           </div>
           <div className={styles["image-container"]}>
             {author && (
@@ -63,7 +60,7 @@ export default async function Post({ params }: { params: any }) {
           />
         )}
       </div>
-      {postContent}
+      {body}
     </div>
   );
 }

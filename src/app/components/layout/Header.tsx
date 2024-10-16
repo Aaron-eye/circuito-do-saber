@@ -43,7 +43,8 @@ const Header = () => {
       <nav className={styles.nav}>
         <Link href="/blog">Blog</Link>
         <Link href="/quizzes">Quizzes</Link>
-        <Link href="/simulators">Simuladores</Link>
+        <Link href="/simuladores">Simuladores</Link>
+        <Link href="/sobre">Sobre</Link>
       </nav>
     </header>
   );

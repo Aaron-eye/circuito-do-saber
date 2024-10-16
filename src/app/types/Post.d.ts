@@ -1,10 +1,10 @@
 import Author from "./Author";
-import BlockContent from "./BlockContent";
 
 export default interface Post {
+  _id: string;
   title: string;
   slug: string;
-  body: BlockContent;
+  body: string | JSX.Element | JSX.Element[];
   categoryNames: string[];
   publishedAt: Date;
   author: Author;

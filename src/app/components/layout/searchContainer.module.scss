@@ -4,36 +4,34 @@
   display: inline-block;
 
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 1fr 5fr;
   gap: 2rem;
   background-color: var(--subtle-light-color);
   padding: var(--header-height) 3.2rem var(--header-height);
 
   .sidebar {
-    .info {
-      padding-top: var(--header-bottom-margin);
-      margin-bottom: 3.2rem;
+    padding-top: var(--header-bottom-margin);
+    margin-bottom: 3.2rem;
 
-      h1 {
-        margin: 0 0 0.5rem 0;
+    h1 {
+      margin: 0 0 0.5rem;
 
-        font-size: 1.8rem;
-        color: var(--dark-text);
-      }
+      font-size: 1.8rem;
+      color: var(--dark-text-color);
+    }
 
-      .results {
-        margin: 0;
-        font-size: 0.8rem;
-        color: var(--soft-dark-text);
-      }
+    .results {
+      margin: 0;
+      font-size: 0.75rem;
+      color: var(--subtle-dark-text-color);
     }
 
     .filter-section {
       h2 {
-        margin: 0 0 1rem;
+        margin: 2rem 0 1rem;
 
         font-size: 1.2rem;
-        color: var(--dark-text);
+        color: var(--dark-text-color);
       }
 
       .filter-list {
@@ -56,11 +54,11 @@
 
           .filter-label {
             font-size: 0.8rem;
-            color: var(--soft-dark-text);
+            color: var(--suble-dark-text-color);
           }
 
           .filter-label.disabled {
-            color: var(--gray-text-color);
+            color: var(--suble-dark-text-color);
           }
         }
       }
@@ -68,7 +66,26 @@
   }
 
   .content-container {
+    padding-top: var(--header-bottom-margin);
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
     min-height: 100%;
+
+    .search-input {
+      button {
+        background: 0;
+        border: 0;
+        cursor: pointer;
+      }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+    }
 
     .loading-container {
       display: flex;
@@ -78,12 +95,11 @@
     }
 
     .content {
-      padding-top: var(--header-bottom-margin);
       width: 100%;
-      margin: 0 0 1.5rem;
+      margin: 0;
 
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 1rem;
     }
 

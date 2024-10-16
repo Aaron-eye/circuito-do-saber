@@ -1,33 +1,46 @@
 import { standardClient } from "@/sanity/client";
+import blockToJSX from "@/app/utils/blockToJSX";
 import Post from "@/app/types/Post"; // Adjust the import based on your types
 import Category from "../types/Category";
 
-const cardPostContent = `
-  'firstBlocks': body[_type == 'block'][0..4].children[_type == 'span'],
-  mainImage,
-  title,
-  slug,
-`;
+type FetchFilteredPostsResult = {
+  posts: Post[];
+  amountOfItems: number;
+};
 
 export async function fetchFilteredPosts(
-  amount: number,
-  filters: string[] = []
-): Promise<Post[]> {
-  const categoryIds = (
-    await standardClient.fetch(
-      `*[_type == "category" && title in [${filters.map((f) => `"${f}"`).join(",")}]] {
-        _id
-      }`
-    )
-  ).map((category: any) => category._id);
+  start: number,
+  end: number,
+  filters: SearchHandlerFilters = {}
+): Promise<FetchFilteredPostsResult> {
+  const { selectedCategories = [], searchTerm = "" } = filters;
 
-  const filterQuery = categoryIds.length
-    ? `&& ${categoryIds.map((id: any) => `"${id}" in categories[]._ref`).join(" && ")}`
-    : "";
+  let categoryMatchFilter = "";
+  if (selectedCategories.length) {
+    const stringifiedFilters = `[${selectedCategories.map((filter) => `"${filter}"`).join(", ")}]`;
+    categoryMatchFilter = `&& count((categories[]->title)[@ in ${stringifiedFilters}]) >= ${selectedCategories.length}`;
+  }
 
-  const query = `*[_type == "post" ${filterQuery}] | order(publishedAt desc)[0..${amount - 1}] { ${cardPostContent} }`;
+  let searchTermFilter = "";
+  if (searchTerm) {
+    searchTermFilter = `&& title match "${searchTerm}*"`;
+  }
 
-  return await standardClient.fetch<Post[]>(query);
+  const filterQuery = `*[_type == "post" ${categoryMatchFilter} ${searchTermFilter}]`;
+
+  const query = `${filterQuery} | order(publishedAt desc) [${start}...${end}] {
+    'firstBlocks': body[_type == 'block'][0..4].children[_type == 'span'],
+    mainImage,
+    title,
+    slug,
+    publishedAt,
+  }`;
+  const posts = await standardClient.fetch<Post[]>(query);
+
+  const countQuery = `count(${filterQuery})`;
+  const amountOfItems = await standardClient.fetch<number>(countQuery);
+
+  return { posts, amountOfItems };
 }
 
 export async function fetchPostPage(slug: string): Promise<Post> {
@@ -42,11 +55,18 @@ export async function fetchPostPage(slug: string): Promise<Post> {
   const post = await standardClient.fetch(
     query,
     { slug },
-    { cache: "no-store" } //Not a good practice, but we want to avoid caching
+    { cache: "no-store" }
   );
-  console.log(post);
 
-  return post[0];
+  const { publishedAt, body, ...rest } = post[0];
+
+  const formattedPost = {
+    ...rest,
+    publishedAt: new Date(publishedAt).toLocaleDateString("pt-BR"),
+    body: blockToJSX(body),
+  };
+
+  return formattedPost;
 }
 
 export async function fetchCategories(): Promise<Category[]> {

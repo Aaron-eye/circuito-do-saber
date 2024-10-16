@@ -1,6 +1,8 @@
 export default interface Author {
   name: string;
-  slug: string;
+  slug: {
+    current: string;
+  };
   image?: {
     asset: {
       _ref: string;
@@ -9,5 +11,5 @@ export default interface Author {
     alt?: string;
     hotspot?: boolean;
   };
-  bio: BlockContent;
+  bio: string | JSX.Element | JSX.Element[];
 }

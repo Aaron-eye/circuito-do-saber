@@ -5,14 +5,23 @@ import PostCard from "../components/PostCard";
 import styles from "./page.module.scss";
 import Post from "@/app/types/Post";
 import { fetchCategories } from "@/app/actions/postActions";
+import { SearchHandler } from "@/components/layout/SearchContainer";
 
 export default async function PostsPage() {
-  const searchHandler = async (selectedFilters: string[]) => {
+  const searchHandler: SearchHandler = async (start, end, filters) => {
     "use server";
-    const filteredPosts = await fetchFilteredPosts(100, selectedFilters);
-    return filteredPosts.map((post: Post) => {
-      return <PostCard key={post.slug} post={post} />;
-    });
+    const { posts, amountOfItems } = await fetchFilteredPosts(
+      start,
+      end,
+      filters
+    );
+
+    return {
+      items: posts.map((post: Post) => {
+        return <PostCard key={post.slug} post={post} />;
+      }),
+      amountOfItems,
+    };
   };
 
   const categoryNames = (await fetchCategories()).map(
