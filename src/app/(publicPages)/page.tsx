@@ -1,8 +1,8 @@
-import PostCard from "./components/PostCard";
+import PostCard from "../components/cards/PostCard";
 import styles from "./page.module.scss";
-import { fetchFilteredPosts } from "./actions/postActions";
-import LinkButton from "./components/LinkButton";
-import Post from "./types/Post";
+import { fetchFilteredPosts } from "../actions/postActions";
+import LinkButton from "../components/LinkButton";
+import Post from "../types/Post";
 
 export default async function Home() {
   const examplePosts = (await fetchFilteredPosts(0, 3)).posts;
@@ -36,7 +36,7 @@ export default async function Home() {
           <h2 id="categorias">Leia nosso blog educacional</h2>
           <div className={styles["card-grid"]}>
             {examplePosts.map((post: Post) => (
-              <PostCard key={post.slug} post={post} />
+              <PostCard key={post.slug.current} post={post} />
             ))}
           </div>
           <LinkButton href="/blog" className={styles["see-more"]}>

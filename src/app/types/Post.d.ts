@@ -3,7 +3,9 @@ import Author from "./Author";
 export default interface Post {
   _id: string;
   title: string;
-  slug: string;
+  slug: {
+    current: string;
+  };
   body: string | JSX.Element | JSX.Element[];
   categoryNames: string[];
   publishedAt: Date;

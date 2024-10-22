@@ -1,6 +1,6 @@
 import styles from "./page.module.scss";
-import { fetchAllAuthors } from "../actions/authorActions";
-import AuthorImg from "../components/AuthorImg";
+import { fetchAllAuthors } from "../../actions/authorActions";
+import AuthorImg from "../../components/AuthorImg";
 
 export default async function AboutPage() {
   const authors = await fetchAllAuthors();

@@ -5,6 +5,7 @@ import { simpleBlockContentType } from "./simpleBlockContentType";
 import { categoryType } from "./categoryType";
 import { postType } from "./postType";
 import { authorType } from "./authorType";
+import { simulatorType } from "./simulatorType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -13,5 +14,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     categoryType,
     postType,
     authorType,
+    simulatorType,
   ],
 };

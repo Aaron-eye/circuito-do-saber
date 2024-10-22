@@ -1,14 +1,13 @@
 // PostsPage.tsx (Server Component)
 import { fetchFilteredPosts } from "@/app/actions/postActions";
 import SearchContainer from "@/components/layout/SearchContainer";
-import PostCard from "../components/PostCard";
+import PostCard from "@/app/components/cards/PostCard";
 import styles from "./page.module.scss";
 import Post from "@/app/types/Post";
 import { fetchCategories } from "@/app/actions/postActions";
-import { SearchHandler } from "@/components/layout/SearchContainer";
 
 export default async function PostsPage() {
-  const searchHandler: SearchHandler = async (start, end, filters) => {
+  const searchHandler = async (start: number, end: number, filters: any) => {
     "use server";
     const { posts, amountOfItems } = await fetchFilteredPosts(
       start,
@@ -18,7 +17,7 @@ export default async function PostsPage() {
 
     return {
       items: posts.map((post: Post) => {
-        return <PostCard key={post.slug} post={post} />;
+        return <PostCard key={post.slug.current} post={post} />;
       }),
       amountOfItems,
     };

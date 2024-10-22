@@ -1,0 +1,25 @@
+@import "@/app/styles/mixins/text-link.scss";
+
+.post-card {
+  height: 27rem;
+
+  .gradient {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(
+      to top,
+      rgb(255, 255, 255),
+      rgba(255, 255, 255, 0)
+    );
+    position: absolute;
+    bottom: 0;
+  }
+
+  .text-content {
+    .description-container {
+    }
+  }
+}

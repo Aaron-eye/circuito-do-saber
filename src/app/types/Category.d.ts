@@ -1,4 +1,6 @@
 export default interface Category {
   title: string;
-  slug: string;
+  slug: {
+    current: string;
+  };
 }

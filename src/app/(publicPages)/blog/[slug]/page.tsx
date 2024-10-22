@@ -1,12 +1,12 @@
 import { fetchPostPage } from "@/app/actions/postActions";
 import styles from "./page.module.scss";
-import Tag from "@/app/components/svg/Tag";
+import Tag from "@/components/svg/Tag";
 import Image from "next/image";
 import urlForImage from "@/app/utils/urlForImage";
-import AuthorImg from "@/app/components/AuthorImg";
+import AuthorImg from "@/components/AuthorImg";
 
 export default async function Post({ params }: { params: any }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   if (!slug) return;
 

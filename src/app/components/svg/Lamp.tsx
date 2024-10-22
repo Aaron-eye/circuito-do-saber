@@ -9,7 +9,7 @@ export default function Lamp() {
       width="800px"
       height="800px"
       viewBox="0 0 72 72"
-      enable-background="new 0 0 72 72"
+      enableBackground="new 0 0 72 72"
       xmlSpace="preserve"
     >
       <g>
