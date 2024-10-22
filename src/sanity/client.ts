@@ -9,7 +9,7 @@ const config = {
   //   req.headers["Cache-Control"] = "stale-while-revalidate, max-age=3600"; // Cache for 1 hour, but update in the background
   //   return req;
   // },
-  useCdn: false,
+  useCdn: true,
 };
 
 const standardClient = createClient({

@@ -1,10 +1,17 @@
+@import "@/app/styles/mixins/text-link.scss";
+
 .footer {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--dark-secondary-color);
+  color: var(--light-text-color);
   height: var(--footer-height);
+
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  bottom: 0;
+  padding: 0 4rem;
+
+  a {
+    @include text-link();
+  }
 }

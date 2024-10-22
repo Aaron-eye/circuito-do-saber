@@ -3,6 +3,7 @@ import styles from "./page.module.scss";
 import Tag from "@/app/components/svg/Tag";
 import Image from "next/image";
 import urlForImage from "@/app/utils/urlForImage";
+import AuthorImg from "@/app/components/AuthorImg";
 
 export default async function Post({ params }: { params: any }) {
   const { slug } = params;
@@ -13,6 +14,7 @@ export default async function Post({ params }: { params: any }) {
   const { title, publishedAt, mainImage, categoryNames, author, body } = post;
 
   const authorImgSize = 100;
+  const mainImageSize = 1000;
 
   return (
     <div className={styles["page"]}>
@@ -36,27 +38,20 @@ export default async function Post({ params }: { params: any }) {
             <p className={styles["date"]}>Publicação: {publishedAt + ""}</p>
           </div>
           <div className={styles["image-container"]}>
-            {author && (
-              <Image
-                src={urlForImage(author.image)
-                  .width(authorImgSize)
-                  .height(authorImgSize)
-                  .url()}
-                width={authorImgSize}
-                height={authorImgSize}
-                alt={author.name}
-              />
-            )}
+            <AuthorImg author={author} size={authorImgSize} />
           </div>
         </div>
       </div>
       <div className={styles["main-image-container"]}>
         {mainImage && (
           <Image
-            src={urlForImage(mainImage).width(400).height(300).url()}
-            width={700}
-            height={400}
-            alt={slug}
+            src={urlForImage(mainImage)
+              .width(mainImageSize)
+              .height(mainImageSize)
+              .url()}
+            width={mainImageSize}
+            height={mainImageSize}
+            alt={mainImage.alt || title}
           />
         )}
       </div>

@@ -1,5 +1,6 @@
 import "./globals.scss";
 import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -23,7 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         {children}
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );

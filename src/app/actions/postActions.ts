@@ -75,5 +75,9 @@ export async function fetchCategories(): Promise<Category[]> {
       slug
     }`;
 
-  return await standardClient.fetch<Category[]>(query);
+  return await standardClient.fetch<Category[]>(
+    query,
+    {},
+    { cache: "no-store" }
+  );
 }

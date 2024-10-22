@@ -1,7 +1,6 @@
 import styles from "./page.module.scss";
 import { fetchAllAuthors } from "../actions/authorActions";
-import Image from "next/image";
-import urlForImage from "../utils/urlForImage";
+import AuthorImg from "../components/AuthorImg";
 
 export default async function AboutPage() {
   const authors = await fetchAllAuthors();
@@ -33,21 +32,13 @@ export default async function AboutPage() {
       <h2>Equipe</h2>
       <div className={styles["team-container"]}>
         {authors.map((author) => {
-          const { name, slug, image, bio } = author;
+          const { name, slug, bio } = author;
           return (
             <div key={slug.current} className={styles["team-member-card"]}>
               <div className={styles["name-image-container"]}>
                 <h3>{name}</h3>
                 <div className={styles["image-container"]}>
-                  <Image
-                    src={urlForImage(image)
-                      .width(authorImgSize)
-                      .height(authorImgSize)
-                      .url()}
-                    width={authorImgSize}
-                    height={authorImgSize}
-                    alt={name}
-                  />
+                  <AuthorImg author={author} size={authorImgSize} />
                 </div>
               </div>
               <div className={styles["bio"]}>{bio}</div>

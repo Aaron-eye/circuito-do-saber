@@ -8,6 +8,7 @@ import Image from "next/image";
 
 const PostCard = ({ post }: { post: any }) => {
   const { title, mainImage } = post;
+
   const slug = post.slug.current;
   const excerpt = post.firstBlocks.map((block: any) => block.text).join(" ");
 
