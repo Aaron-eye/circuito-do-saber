@@ -2,6 +2,11 @@ import styles from "./page.module.scss";
 import { fetchAllAuthors } from "../../actions/authorActions";
 import AuthorImg from "../../components/AuthorImg";
 
+export const metadata = {
+  title: "Sobre Circuito do Saber",
+  description: "Página sobre o projeto Circuito do Saber",
+};
+
 export default async function AboutPage() {
   const authors = await fetchAllAuthors();
   const authorImgSize = 200;

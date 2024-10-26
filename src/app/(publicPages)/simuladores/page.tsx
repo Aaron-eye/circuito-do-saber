@@ -3,6 +3,11 @@ import SimulatorCard from "./components/SimulatorCard";
 import styles from "./page.module.scss";
 import { fetchSimulators } from "@/app/actions/simulatorActions";
 
+export const metadata = {
+  title: "Simuladores",
+  description: "Página dos simuladores",
+};
+
 export default async function SimulatorsPage() {
   const simulators = await fetchSimulators();
   console.log(simulators);

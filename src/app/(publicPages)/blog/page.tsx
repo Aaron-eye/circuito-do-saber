@@ -6,6 +6,11 @@ import styles from "./page.module.scss";
 import Post from "@/app/types/Post";
 import { fetchCategories } from "@/app/actions/postActions";
 
+export const metadata = {
+  title: "Blog",
+  description: "Página de blog educacional",
+};
+
 export default async function PostsPage() {
   const searchHandler = async (start: number, end: number, filters: any) => {
     "use server";

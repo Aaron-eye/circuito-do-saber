@@ -4,6 +4,11 @@ import { fetchFilteredPosts } from "../actions/postActions";
 import LinkButton from "../components/LinkButton";
 import Post from "../types/Post";
 
+export const metadata = {
+  title: "Circuito do Saber",
+  description: "Página inicial da Circuito do Saber",
+};
+
 export default async function Home() {
   const examplePosts = (await fetchFilteredPosts(0, 3)).posts;
 

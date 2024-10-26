@@ -19,7 +19,11 @@ export default function Card({
   externalLink?: boolean;
 }) {
   const LinkElement = externalLink
-    ? ({ children }: { children: any }) => <a href={`//${href}`}>{children}</a>
+    ? ({ children }: { children: any }) => (
+        <a href={`${href}`} target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
+      )
     : ({ children }: { children: any }) => <Link href={href}>{children}</Link>;
 
   return (
