@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz de Física</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 4rem 4rem;
+      }
+      .question-container {
+        margin-bottom: 20px;
+      }
+      .feedback {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .correct {
+        color: green;
+      }
+      .incorrect {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Quiz de Física: Eletrostática e Eletrodinâmica</h1>
+
+    <div id="quiz"></div>
+    <button onclick="submitQuiz()">Enviar Respostas</button>
+
+    <script>
+      const questions = [
+        // Eletrostática - Fácil
+        {
+          question: "Qual é a unidade de carga elétrica?",
+          options: ["Coulomb", "Newton", "Volt", "Ampère"],
+          answer: "Coulomb",
+          level: "Fácil",
+        },
+
+        // Eletrostática - Médio
+        {
+          question: "O que é um elétron?",
+          options: [
+            "Uma partícula sem carga",
+            "Uma partícula de carga negativa",
+            "Uma partícula de carga positiva",
+            "Uma partícula neutra",
+          ],
+          answer: "Uma partícula de carga negativa",
+          level: "Médio",
+        },
+        {
+          question: "Qual é a fórmula da Lei de Coulomb?",
+          options: [
+            "F = k(q1 * q2) / r²",
+            "F = q1 * q2 / k",
+            "F = k(q1 + q2) / r",
+            "F = k(q1 * q2) * r²",
+          ],
+          answer: "F = k(q1 * q2) / r²",
+          level: "Médio",
+        },
+
+        // Eletrostática - Difícil
+        {
+          question:
+            "Em um sistema de duas cargas iguais e de sinais opostos, qual é o campo elétrico resultante no ponto médio entre elas?",
+          options: ["Zero", "Máximo", "Mínimo", "Indefinido"],
+          answer: "Máximo",
+          level: "Difícil",
+        },
+
+        // Eletrodinâmica - Fácil
+        {
+          question: "Qual é a unidade de resistência elétrica?",
+          options: ["Ohm", "Volt", "Ampère", "Joule"],
+          answer: "Ohm",
+          level: "Fácil",
+        },
+
+        // Eletrodinâmica - Médio
+        {
+          question: "Qual é a fórmula da Lei de Ohm?",
+          options: ["V = IR", "V = I/R", "V = IR²", "V = I+R"],
+          answer: "V = IR",
+          level: "Médio",
+        },
+        {
+          question: "O que é corrente elétrica?",
+          options: [
+            "Fluxo de elétrons",
+            "Fluxo de prótons",
+            "Energia potencial",
+            "Carga estacionária",
+          ],
+          answer: "Fluxo de elétrons",
+          level: "Médio",
+        },
+
+        // Eletrodinâmica - Difícil
+        {
+          question:
+            "Em um circuito em série com três resistores, qual é a resistência total se cada resistor tem resistência R?",
+          options: ["R/3", "3R", "R²", "R"],
+          answer: "3R",
+          level: "Difícil",
+        },
+      ];
+
+      function createQuiz() {
+        const quizContainer = document.getElementById("quiz");
+        questions.forEach((q, index) => {
+          const questionDiv = document.createElement("div");
+          questionDiv.className = "question-container";
+
+          const questionTitle = document.createElement("h3");
+          questionTitle.innerText = `${index + 1}. (${q.level}) ${q.question}`;
+          questionDiv.appendChild(questionTitle);
+
+          q.options.forEach((option) => {
+            const label = document.createElement("label");
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = `question${index}`;
+            radio.value = option;
+            label.appendChild(radio);
+            label.appendChild(document.createTextNode(option));
+            questionDiv.appendChild(label);
+            questionDiv.appendChild(document.createElement("br"));
+          });
+
+          const feedback = document.createElement("div");
+          feedback.className = "feedback";
+          feedback.id = `feedback${index}`;
+          questionDiv.appendChild(feedback);
+
+          quizContainer.appendChild(questionDiv);
+        });
+      }
+
+      function submitQuiz() {
+        questions.forEach((q, index) => {
+          const selectedOption = document.querySelector(
+            `input[name="question${index}"]:checked`
+          );
+          const feedback = document.getElementById(`feedback${index}`);
+
+          if (selectedOption) {
+            if (selectedOption.value === q.answer) {
+              feedback.innerText = "Resposta correta!";
+              feedback.className = "feedback correct";
+            } else {
+              feedback.innerText = `Resposta incorreta. A resposta correta é: ${q.answer}`;
+              feedback.className = "feedback incorrect";
+            }
+          } else {
+            feedback.innerText = "Por favor, selecione uma resposta.";
+            feedback.className = "feedback incorrect";
+          }
+        });
+      }
+
+      createQuiz();
+    </script>
+  </body>
+</html>

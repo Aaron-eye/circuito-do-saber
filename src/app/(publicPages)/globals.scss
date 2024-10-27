@@ -15,12 +15,23 @@
 }
 
 html {
+  min-height: 100vh;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
+}
+
+iframe {
+  display: block; /* iframes are inline by default */
+  border: none; /* Reset default border */
+  height: 100vh; /* Viewport-relative units */
+}
+
+.content {
+  min-height: calc(100vh - var(--footer-height));
 }
 
 a {
