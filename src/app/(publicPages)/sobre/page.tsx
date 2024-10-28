@@ -34,6 +34,14 @@ export default async function AboutPage() {
         e Tecnologia da Bahia, Campus Seabra, como parte avaliativa da II
         unidade. Professor: Nelson Costa.
       </p>
+      <h2>Tecnologias utilizadas</h2>
+      <ul>
+        <li>Next JS App Router: framework de React</li>
+        <li>Sass: pré processador de CSS</li>
+        <li>TypeScript: superconjunto de JavaScript</li>
+        <li>Sanity: CMS para gerenciamento de conteúdo</li>
+      </ul>
+
       <h2>Equipe</h2>
       <div className={styles["team-container"]}>
         {authors.map((author) => {
