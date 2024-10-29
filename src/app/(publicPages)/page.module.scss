@@ -1,6 +1,8 @@
+@import "@/app/styles/mixins/text-link.scss";
+
 .page {
   section {
-    padding: 7.2rem 6rem;
+    padding: 5.2rem 6rem;
   }
 
   .hero {
@@ -96,7 +98,9 @@
     }
   }
 
-  .main {
+  main {
+    padding: 3.2rem 0;
+
     h2 {
       color: var(--dark-text-color);
       text-align: center;
@@ -115,6 +119,60 @@
 
     .see-more {
       margin: 0 auto 0;
+    }
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 6.4rem;
+    row-gap: 2rem;
+
+    .quiz-element {
+      svg {
+        fill: var(--gray-text-color);
+      }
+    }
+
+    .feature-element {
+      height: 100%;
+      padding-left: 1.5rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2rem;
+
+      svg {
+        width: 3.6rem;
+        height: 3.6rem;
+        margin-bottom: 1rem;
+        stroke: var(--gray-text-color);
+      }
+
+      .description {
+        font-size: 1.2rem;
+        color: var(--dark-text-color);
+        text-align: center;
+      }
+
+      a {
+        @include text-link();
+      }
+
+      p {
+        margin: 0;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 3px;
+        height: 90%;
+        background-color: var(--light-gray-color);
+      }
     }
   }
 }

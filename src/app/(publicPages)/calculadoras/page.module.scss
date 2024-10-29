@@ -1,0 +1,15 @@
+@import "@/app/styles/mixins/content-page.scss";
+
+.page {
+  @include content-page();
+  h1 {
+    margin-top: 0;
+  }
+
+  .calculators-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 6.4rem;
+    row-gap: 2rem;
+  }
+}
